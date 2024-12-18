@@ -27,7 +27,7 @@ function HomePage() {
           <div className="w-full max-w-xl bg-white rounded-lg shadow-md p-6">
             <h2 className="text-2xl font-bold mb-4">Campus Map</h2>
             <div className="h-96 bg-gray-200 flex items-center justify-center">
-              Campus Map Placeholder
+              Campus Map
             </div>
           </div>
         );
@@ -39,7 +39,7 @@ function HomePage() {
           >
             <h2 className="text-2xl font-bold mb-4">University Brochure</h2>
             <div className="h-96 bg-gray-200 flex items-center justify-center">
-              Click to Open Brochure PDF
+              Click to Open Brochure
               <BookOpen className="ml-2 w-6 h-6" />
             </div>
           </div>
@@ -50,9 +50,9 @@ function HomePage() {
             className="w-full max-w-xl bg-white rounded-lg shadow-md p-6 cursor-pointer hover:bg-gray-50 transition-colors"
             onClick={openSchedule}
           >
-            <h2 className="text-2xl font-bold mb-4">Academic Schedule</h2>
+            <h2 className="text-2xl font-bold mb-4">Events Schedule</h2>
             <div className="h-96 bg-gray-200 flex items-center justify-center">
-              Click to Open Events Schedule PDF
+              Click to Open Events Schedule
               <Calendar className="ml-2 w-6 h-6" />
             </div>
           </div>
@@ -67,8 +67,8 @@ function HomePage() {
       {/* Top Section with Logos */}
       <div className="w-full py-4 px-4">
         <div className="flex justify-between max-w-4xl mx-auto">
-          <div className="bg-blue-600 text-white p-4 rounded-full">SRM</div>
-          <div className="bg-green-600 text-white p-4 rounded-full">AIU</div>
+          <div className="bg-blue-600 text-white p-4 rounded-full">SRM-AIU</div>
+          <div className="bg-green-600 text-white p-4 rounded-full"></div>
         </div>
       </div>
 
