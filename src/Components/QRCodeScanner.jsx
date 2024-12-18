@@ -1,123 +1,80 @@
-import React, { useState } from "react";
-import { Map, Calendar, BookOpen } from "lucide-react";
+import React, { useState } from 'react';
+import { Menu, Map, BookOpen, Calendar, X } from 'lucide-react';
 
-function HomePage() {
-  const [activeSection, setActiveSection] = useState("map");
+function QRCodeScanner() {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  const openBrochure = () => {
-    window.open(
-      "https://srmsigaram.com/downloads/SRMSIGARAM_2024_brochure._compressed.pdf",
-      "_blank",
-      "noopener,noreferrer"
-    );
-  };
-
-  const openSchedule = () => {
-    window.open(
-      "https://srmsigaram.com/downloads/Events_Schedule.pdf",
-      "_blank",
-      "noopener,noreferrer"
-    );
-  };
-
-  const renderContent = () => {
-    switch (activeSection) {
-      case "map":
-        return (
-          <div className="w-full max-w-xl bg-white rounded-lg shadow-md p-6">
-            <h2 className="text-2xl font-bold mb-4">Campus Map</h2>
-            <div className="h-96 bg-gray-200 flex items-center justify-center">
-              Campus Map
-            </div>
-          </div>
-        );
-      case "brochure":
-        return (
-          <div
-            className="w-full max-w-xl bg-white rounded-lg shadow-md p-6 cursor-pointer hover:bg-gray-50 transition-colors"
-            onClick={openBrochure}
-          >
-            <h2 className="text-2xl font-bold mb-4">University Brochure</h2>
-            <div className="h-96 bg-gray-200 flex items-center justify-center">
-              Click to Open Brochure
-              <BookOpen className="ml-2 w-6 h-6" />
-            </div>
-          </div>
-        );
-      case "schedule":
-        return (
-          <div
-            className="w-full max-w-xl bg-white rounded-lg shadow-md p-6 cursor-pointer hover:bg-gray-50 transition-colors"
-            onClick={openSchedule}
-          >
-            <h2 className="text-2xl font-bold mb-4">Events Schedule</h2>
-            <div className="h-96 bg-gray-200 flex items-center justify-center">
-              Click to Open Events Schedule
-              <Calendar className="ml-2 w-6 h-6" />
-            </div>
-          </div>
-        );
-      default:
-        return null;
+  const menuItems = [
+    {
+      icon: Map,
+      text: 'Campus Map',
+      link: null // Replace with actual map link if needed
+    },
+    {
+      icon: BookOpen,
+      text: 'Brochure',
+      link: 'https://srmsigaram.com/downloads/SRMSIGARAM_2024_brochure.-rules%20and%20regulations.pdf'
+    },
+    {
+      icon: Calendar,
+      text: 'Event Schedule',
+      link: 'https://srmsigaram.com/downloads/Events_Schedule.pdf'
     }
+  ];
+
+  const handleItemClick = (link) => {
+    if (link) {
+      window.open(link, '_blank', 'noopener,noreferrer');
+    }
+    setIsMenuOpen(false);
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 flex flex-col">
-      {/* Top Section with Logos */}
-      <div className="w-full py-4 px-4">
-        <div className="flex justify-between max-w-4xl mx-auto">
-          <div className="bg-blue-600 text-white p-4 rounded-full">SRM-AIU</div>
-          <div className="bg-green-600 text-white p-4 rounded-full"></div>
+    <div className="min-h-screen bg-gray-100 flex flex-col items-center justify-center relative">
+      {/* Main Container */}
+      <div className="w-full max-w-md px-4">
+        {/* Title */}
+        <div className="text-center mb-8">
+          <h1 className="text-3xl font-bold text-gray-800">SRM UNIVERSITY</h1>
         </div>
+
+        {/* Menu Button */}
+        <div className="flex justify-center">
+          <button 
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            className="bg-blue-600 text-white p-4 rounded-full shadow-lg hover:bg-blue-700 transition-colors flex items-center space-x-2"
+          >
+            {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            <span>Menu</span>
+          </button>
+        </div>
+
+        {/* Dropdown Menu */}
+        {isMenuOpen && (
+          <div className="mt-4 space-y-4">
+            {menuItems.map((item, index) => (
+              <button
+                key={index}
+                onClick={() => handleItemClick(item.link)}
+                className="w-full bg-white rounded-lg shadow-md p-4 flex items-center space-x-4 hover:bg-gray-50 transition-colors"
+              >
+                <item.icon className="w-6 h-6 text-blue-600" />
+                <span className="text-lg font-medium">{item.text}</span>
+              </button>
+            ))}
+          </div>
+        )}
       </div>
 
-      {/* Main Content */}
-      <div className="flex-grow flex flex-col justify-center items-center px-4 py-8">
-        {/* Navigation Buttons */}
-        <div className="flex space-x-4 mb-6">
-          <button
-            onClick={() => setActiveSection("map")}
-            className={`flex items-center space-x-2 px-4 py-2 rounded-lg ${
-              activeSection === "map"
-                ? "bg-blue-600 text-white"
-                : "bg-gray-200 text-gray-700"
-            }`}
-          >
-            <Map className="w-5 h-5" />
-            <span>Map</span>
-          </button>
-
-          <button
-            onClick={() => setActiveSection("brochure")}
-            className={`flex items-center space-x-2 px-4 py-2 rounded-lg ${
-              activeSection === "brochure"
-                ? "bg-blue-600 text-white"
-                : "bg-gray-200 text-gray-700"
-            }`}
-          >
-            <BookOpen className="w-5 h-5" />
-            <span>Brochure</span>
-          </button>
-
-          <button
-            onClick={() => setActiveSection("schedule")}
-            className={`flex items-center space-x-2 px-4 py-2 rounded-lg ${
-              activeSection === "schedule"
-                ? "bg-blue-600 text-white"
-                : "bg-gray-200 text-gray-700"
-            }`}
-          >
-            <Calendar className="w-5 h-5" />
-            <span>Schedule</span>
-          </button>
-        </div>
-
-        {/* Content Area */}
-        <div className="w-full flex justify-center">{renderContent()}</div>
+      {/* Background Logos */}
+      <div className="absolute top-4 left-4">
+        <div className="bg-blue-600 text-white p-2 rounded-full">SRM</div>
+      </div>
+      <div className="absolute top-4 right-4">
+        <div className="bg-green-600 text-white p-2 rounded-full">AIU</div>
       </div>
     </div>
   );
 }
 
-export default HomePage;
+export default QRCodeScanner;
